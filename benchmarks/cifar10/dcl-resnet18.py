@@ -1,26 +1,4 @@
-"""CIFAR-10 DCL benchmark with a matched SimCLR comparison.
-
-Run from the repository root after installing this branch with ``pip install -e .``::
-
-    python benchmarks/cifar10/dcl-resnet18.py --accelerator gpu
-    python benchmarks/cifar10/dcl-resnet18.py --method simclr --accelerator gpu
-
-Both runs use the same initialization seed, augmentations, projector, optimizer,
-temperature, and evaluation. Only the forward function and contrastive loss
-change. This is a controlled comparison, not an exact paper reproduction or a
-separately tuned SimCLR baseline. Batch size counts original images (two views
-per image). Evaluation uses backbone embeddings, not projector outputs.
-
-The metrics are online queue-based kNN and online linear-probe top-1 accuracy
-on CIFAR-10's test split, used as validation. The linear classifier trains on
-detached backbone embeddings while SSL training continues. These are not a
-separate frozen-encoder evaluation or a fresh full-training-set kNN evaluation.
-Report the final epoch, without selecting a checkpoint by test accuracy.
-Avoid tuning on this test split.
-Manager saves configuration, metrics.csv, and checkpoints under --output-dir.
-The experiment checkpoint is final.ckpt; Manager also saves last.ckpt for recovery.
-Synthetic --smoke runs exercise the pipeline but give no meaningful accuracy.
-"""
+"""CIFAR-10 DCL benchmark with a matched SimCLR comparison."""
 
 import argparse
 from pathlib import Path
